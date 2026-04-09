@@ -2,4 +2,31 @@
 
 body {
     background-color: lightgrey;
+    overflow: hidden;
+}
+
+h1 {
+    margin: 0;
+}
+
+header {
+    background-color: rebeccapurple;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 8px;
+    color: white;
+}
+
+#main-content {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+}
+
+.project {
+    background-color: white;
+    padding: 16px;
+    border-radius: 12px;
 }
