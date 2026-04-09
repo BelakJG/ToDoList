@@ -22,6 +22,7 @@ export function CreateProject(projectData) {
     const timeDiff = Math.floor((date - new Date()) / (1000 * 60 * 60 * 24));
     due.textContent = `Due on ${date.toLocaleDateString()}, in ${timeDiff} Days`;
     project.appendChild(due);
+    project.dataset.daysTillDue = timeDiff;
 
     const list = document.createElement("ul");
     for (const step of projectData.getAll("steps[]")) {
@@ -44,7 +45,25 @@ export function CreateProject(projectData) {
     project.appendChild(deleteBtn);
 
     const priorityList = projects.querySelector(`#${projectData.get("priority")}`);
-    priorityList.appendChild(project);
+    insertProject(priorityList, project);
+}
+
+function insertProject(priolist, project) {
+    let next = priolist.firstElementChild;
+    next = next.nextElementSibling;
+    while (next) {
+        let days = next.dataset.daysTillDue;
+        if (days >= project.dataset.daysTillDue) {
+            next.before(project);
+            break;
+        } else {
+            next = next.nextElementSibling;
+        }
+    }
+    if (!next) {
+        console.log("end of list");
+        priolist.appendChild(project);
+    }
 }
 
 function removeProject(projectID) {
