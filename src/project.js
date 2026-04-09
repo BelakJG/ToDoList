@@ -17,6 +17,12 @@ export function CreateProject(projectData) {
     description.textContent = projectData.get("description");
     project.appendChild(description);
 
+    const due = document.createElement("p");
+    const date = new Date(projectData.get("dueDate"));
+    const timeDiff = Math.floor((date - new Date()) / (1000 * 60 * 60 * 24));
+    due.textContent = `Due on ${date.toLocaleDateString()}, in ${timeDiff} Days`;
+    project.appendChild(due);
+
     const list = document.createElement("ul");
     for (const step of projectData.getAll("steps[]")) {
         if (!step.trim()) {
