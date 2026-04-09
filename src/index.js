@@ -8,7 +8,7 @@ projectForm.addEventListener("submit", (Event) => {
     Event.preventDefault();
     const data = new FormData(projectForm);
     CreateProject(data);
-    // projectForm.reset();
+    projectForm.reset();
 });
 
 const stepBtn = document.querySelector("#add-step");
