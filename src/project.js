@@ -37,12 +37,15 @@ export function CreateProject(projectData) {
     });
     project.appendChild(deleteBtn);
 
-    projects.prepend(project);
+    const priorityList = projects.querySelector(`#${projectData.get("priority")}`);
+    priorityList.appendChild(project);
 }
 
 function removeProject(projectID) {
     const project = projects.querySelector(`[data-project-id="${projectID}"]`);
     if (project){
-        project.remove(); 
+        if (confirm("Delete Project?")) {
+            project.remove();
+        }
     }
 }

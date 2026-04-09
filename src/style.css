@@ -3,7 +3,7 @@
 body {
     background-color: lightgrey;
     overflow: hidden;
-    height: 100vh;
+    height: 100dvh;
 }
 
 h1 {
@@ -12,20 +12,30 @@ h1 {
 
 header {
     background-color: rebeccapurple;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
     display: flex;
+    align-items: center;
     justify-content: space-evenly;
     padding: 8px;
     color: white;
 }
 
 #main-content {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 8px;
     gap: 16px;
-    height: 100%;
 }
 
 form {
@@ -39,13 +49,32 @@ form {
 }
 
 #projects {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: start;
+    justify-items: center;
+}
+
+#projects > div {
+    background-color: #CBC3E3;
+    border-radius: 8px;
+    width: 90%;
+    padding: 8px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 8px;
+    box-shadow: 0 0 25px 5px gray;
+}
+
+.prioTitle {
+    color: white;
 }
 
 .project {
     background-color: white;
     padding: 16px;
     border-radius: 12px;
+    width: 80%;
 }
