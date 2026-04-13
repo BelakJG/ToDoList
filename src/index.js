@@ -8,13 +8,14 @@ function populateFromStorage() {
     const projectsData = getProjectsData();
     for (const project of projectsData) {
         const data = new FormData();
-        data.append("id", project["id"]);
-        data.append("title", project["title"]);
-        data.append("description", project["description"]);
-        data.append("dueDate", project["dueDate"]);
-        data.append("priority", project["priority"]);
-        for (const step of project["steps"]) {
-            data.append("steps[]", step);
+        for (const [key, value] of Object.entries(project)) {
+            if (Array.isArray(value)) {
+                for (const slice of value) {
+                    data.append(`${key}[]`, slice);
+                }
+            } else {
+                data.append(key, value);
+            }
         }
 
         CreateProject(data);
