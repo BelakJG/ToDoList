@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+<script defer src="main.js"></script></head>
+<body>
+    <header>
+        <h1>ToDo List</h1>
+    </header>
+    <div id="main-content">
+        <form id="project-form">
+            <div class="fields">
+                <div class="field">
+                    <label for="title">*Title: </label>
+                    <input type="text" name="title" placeholder="Project Title" required>
+                </div>
+                <div class="field">
+                    <label for="description">*Description: </label>
+                    <input type="text" name="description" placeholder="Project description" required>
+                </div>
+                <div class="field">
+                    <label for="dueDate">*Date: </label>
+                    <input type="date" name="dueDate" placeholder="Project due date" required>
+                </div>
+                <div class="field">
+                    <label for="priority">*Priority: </label>
+                    <select name="priority" required>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low" selected>Low</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="steps[]">*Step: </label>
+                    <input type="text" name="steps[]" placeholder="Project Step" required>
+                </div>
+            </div>
+    
+            <div class="form-buttons">
+                <button type="submit">Create Project</button>
+                <button type="button" id="add-step">Add Step</button>
+            </div>
+        </form>
+        <div id="projects">
+            <div id="high">
+                <h1 class="prioTitle">High Priority</h1>
+            </div>
+            <div id="medium">
+                <h1 class="prioTitle">Medium Priority</h1>
+            </div>
+            <div id="low">
+                <h1 class="prioTitle">Low Priority</h1>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
