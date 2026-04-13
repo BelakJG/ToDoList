@@ -1,7 +1,8 @@
+import { removeProjectFromStorage } from "./storageController.js"
 const projects = document.querySelector("#projects");
 
 class Project {
-    _projectID = crypto.randomUUID();
+    _projectID;
     _title;
     _description;
     _dueDate;
@@ -10,6 +11,7 @@ class Project {
     _completed = false;
 
     constructor(projectData) {
+        this._projectID = projectData.get("id");
         this._title = projectData.get("title");
         this._description = projectData.get("description");
         this._dueDate = projectData.get("dueDate");
@@ -123,6 +125,7 @@ function removeProject(projectID) {
     if (project){
         if (confirm("Delete Project?")) {
             project.remove();
+            removeProjectFromStorage(projectID);
         }
     }
 }
