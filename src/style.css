@@ -57,7 +57,6 @@ form {
 }
 
 #projects > div {
-    background-color: #CBC3E3;
     border-radius: 8px;
     width: 90%;
     padding: 8px;
@@ -66,6 +65,22 @@ form {
     align-items: center;
     gap: 8px;
     box-shadow: 0 0 25px 5px gray;
+}
+
+#projects h1 {
+    color: black;
+}
+
+#high {
+    background-color: red;
+}
+
+#medium {
+    background-color: yellow;
+}
+
+#low {
+    background-color: green;
 }
 
 .prioTitle {
@@ -77,4 +92,13 @@ form {
     padding: 16px;
     border-radius: 12px;
     width: 80%;
+}
+
+.project.completed {
+    background-color: lightgreen;
+}
+
+.project-buttons {
+    display: flex;
+    justify-content: space-evenly;
 }

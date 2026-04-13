@@ -1,4 +1,4 @@
-import { removeProjectFromStorage } from "./storageController.js"
+import { removeProjectFromStorage, updateValueInStorage } from "./storageController.js"
 const projects = document.querySelector("#projects");
 
 class Project {
@@ -8,7 +8,7 @@ class Project {
     _dueDate;
     _priority;
     _steps;
-    _completed = false;
+    _completed;
 
     constructor(projectData) {
         this._projectID = projectData.get("id");
@@ -17,6 +17,7 @@ class Project {
         this._dueDate = projectData.get("dueDate");
         this._priority = projectData.get("priority");
         this._steps = projectData.getAll("steps[]");
+        this._completed = projectData.get("completed");
     }
 
     get projectID() {
@@ -46,6 +47,14 @@ class Project {
     get completed() {
         return this._completed;
     }
+
+    toggleCompleted() {
+        if (this._completed == "true") {
+            this._completed = "false";
+        } else {
+            this._completed = "true";
+        }
+    }
 }
 
 export function CreateProject(projectData) {
@@ -57,6 +66,9 @@ function displayProject(project) {
     const projectDetails = document.createElement("details");
     projectDetails.open = true;
     projectDetails.classList.add("project");
+    if (project.completed == "true") {
+        projectDetails.classList.add("completed");
+    }
     projectDetails.dataset.projectId = project.projectID;
 
     const summary = document.createElement("h3");
@@ -90,16 +102,39 @@ function displayProject(project) {
     }
     projectDetails.appendChild(list);
 
+    const buttons = document.createElement("div")
+    buttons.classList.add("project-buttons");
+
     const deleteBtn = document.createElement("button");
     deleteBtn.type = "button";
     deleteBtn.textContent = "Delete Project";
     deleteBtn.addEventListener("click", () => {
         removeProject(project.projectID);
     });
-    projectDetails.appendChild(deleteBtn);
+    buttons.appendChild(deleteBtn);
+
+    const completeBtn = document.createElement("button");
+    completeBtn.type = "button";
+    completeBtn.textContent = "Toggle Completeion";
+    completeBtn.addEventListener("click", () => {
+        projectComplete(project);
+    });
+    buttons.appendChild(completeBtn);
+    projectDetails.appendChild(buttons);
 
     const priorityList = projects.querySelector(`#${project.priority}`);
     insertProject(priorityList, projectDetails);
+}
+
+function projectComplete(project) {
+    const projectEntry = projects.querySelector(`[data-project-id="${project.projectID}"]`);
+    if (project.completed == "false") {
+        projectEntry.classList.add("completed");
+    } else {
+        projectEntry.classList.remove("completed");
+    }
+    project.toggleCompleted();
+    updateValueInStorage(project.projectID, "completed", project.completed);
 }
 
 function insertProject(priolist, project) {
